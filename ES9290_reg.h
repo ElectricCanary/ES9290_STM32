@@ -1,0 +1,678 @@
+/*
+ * ES9290_reg.h
+ *
+ *  Created on: Mar 14, 2025
+ *      Author: Antoine Ricoux for Electric Canary
+ */
+
+#ifndef SRC_ES9290_REG_H_
+#define SRC_ES9290_REG_H_
+
+//_reg is register number
+//_bm is bit mask
+//_reg_def default value of register
+
+#define SYS_CONFIG_reg 0
+#define SYS_CONFIG_reg_def 8
+#define ENABLE_ADC_bm 1
+#define ENABLE_DAC_bm 2
+#define ENABLE_64FS_MODE_bm 4
+#define AUTO_FS_DETECT_bm 8
+#define AUTO_FS_DETECT_BLOCK_64FS_bm 16
+#define FORCE_PLL_LOCK_bm 32
+#define SOFT_RESET_bm 128
+
+#define CODEC_CONFIG_reg 1
+#define CODEC_CONFIG_reg_def 3
+#define ENABLE_TDM_ENCODE_bm 1
+#define ENABLE_TDM_DECODE_bm 2
+
+#define FRONTEND_CLOCK_CONTROL_reg 2
+#define FRONTEND_CLOCK_CONTROL_reg_def 3
+#define MCLK_128FS_DIV_bm 63
+#define MCLK_128FS_HALF_DIV_bm 64
+#define EN_CLK_DET_bm 128
+
+#define BACKEND_CLOCK_CONTROL_reg 3
+#define BACKEND_CLOCK_CONTROL_reg_def 8
+#define MCLK_24M_DIV2_bm 16
+#define DAC_CLK_INV_bm 128
+
+#define PCM_MASTER_CLK_CONFIG_reg 4
+#define PCM_MASTER_CLK_CONFIG_reg_def 7
+
+#define TDM_CONFIG1_reg 5
+#define TDM_CONFIG1_reg_def 1
+#define TDM_CH_NUM_bm 31
+#define AUTO_CH_DETECT_bm 64
+#define TDM_RESYNC_bm 128
+
+#define TDM_CONFIG2_reg 6
+#define TDM_CONFIG2_reg_def 192
+#define TDM_LJ_bm 1
+#define TDM_VALID_EDGE_bm 2
+#define TDM_BIT_DEPTH_bm 4
+#define TDM_BIT_DEPTH_16BIT_bm 8
+#define TDM_BIT_DEPTH_24BIT_bm 4
+#define TDM_BIT_DEPTH_32BIT_bm 0
+#define TDM_WORD_WIDTH_bm 48
+#define TDM_WORD_WIDTH_16BIT_bm 32
+#define TDM_WORD_WIDTH_24BIT_bm 16
+#define TDM_WORD_WIDTH_32BIT_bm 0
+#define ENABLE_BCK_MONITOR_bm 64
+#define ENABLE_WS_MONITOR_bm 128
+
+#define ADC_TDM_CH1_SLOT_CONFIG_reg 7
+#define ADC_TDM_CH1_SLOT_CONFIG_reg_def 0
+#define ADC_TDM_SLOT_SEL_CH1_bm 31
+#define ADC_16BIT_DITHER_SHAPE_bm 32
+
+#define ADC_TDM_CH2_SLOT_CONFIG_reg 8
+#define ADC_TDM_CH2_SLOT_CONFIG_reg_def 1
+#define ADC_TDM_SLOT_SEL_CH2_bm 31
+
+#define DAC_TDM_CH1_SLOT_CONFIG_reg 9
+#define DAC_TDM_CH1_SLOT_CONFIG_reg_def 0
+#define DAC_TDM_SLOT_SEL_CH1_bm 31
+
+#define DAC_TDM_CH2_SLOT_CONFIG_reg 10
+#define DAC_TDM_CH2_SLOT_CONFIG_reg_def 1
+#define DAC_TDM_SLOT_SEL_CH2_bm 31
+
+#define ADC_DAISY_CHAIN_reg 11
+#define ADC_DAISY_CHAIN_reg_def 0
+#define ADC_TDM_DATA_LATCH_ADJ_bm 31
+#define ADC_TDM_DAISY_CHAIN_bm 32
+
+#define DAC_DAISY_CHAIN_reg 12
+#define DAC_DAISY_CHAIN_reg_def 0
+#define DAC_TDM_DATA_LATCH_ADJ_bm 31
+#define DAC_TDM_DAISY_CHAIN_bm 32
+
+#define PCM_MASTER_MODE_CONFIG_reg 13
+#define PCM_MASTER_MODE_CONFIG_reg_def 18
+#define MASTER_MODE_EN_bm 1
+#define MASTER_BCK_INVERT_bm 2
+#define MASTER_WS_INVERT_bm 4
+#define MASTER_WS_PULSE_MODE_bm 8
+#define MASTER_WS_CLK_PHASE_bm 16
+#define SLAVE_BCK_INVERT_bm 128
+
+#define VOLUME_UP_RAMP_RATE_reg 14
+#define VOLUME_UP_RAMP_RATE_reg_def 4
+
+#define VOLUME_DOWN_RAMP_RATE_reg 15
+#define VOLUME_DOWN_RAMP_RATE_reg_def 4
+
+#define AUTO_SYNC_CONFIG_reg 17
+#define AUTO_SYNC_CONFIG_reg_def 15
+#define AUTO_FS_CLK_GEN_SYNC_bm 1
+#define AUTO_ICG_SYNC_bm 2
+#define AUTO_WS_PHASE_SYNC_bm 4
+#define AUTO_MCLK_24M_PHASE_SYNC_bm 8
+
+#define STATUS_BITS_MASK_reg 18
+#define STATUS_BITS_MASK_reg_def 0
+#define STATUS_MASK_CH1_PEAK_LATCH_bm 1
+#define STATUS_MASK_CH2_PEAK_LATCH_bm 2
+#define STATUS_MASK_CH1_PEAK_DET_bm 4
+#define STATUS_MASK_CH2_PEAK_DET_bm 8
+#define STATUS_MASK_PLL_LOCKED_bm 16
+
+#define STATUS_BITS_CLEAR_reg 19
+#define STATUS_BITS_CLEAR_reg_def 0
+#define STATUS_CLEAR_CH1_PEAK_LATCH_bm 1
+#define STATUS_CLEAR_CH2_PEAK_LATCH_bm 2
+
+#define CHARGE_PUMP_CONFIG_reg 21
+#define CHARGE_PUMP_CONFIG_reg_def 1
+#define CP_PDB_MUTE_bm 1
+
+#define CHARGE_PUMP_CLOCK_DIV_reg 23
+#define CHARGE_PUMP_CLOCK_DIV_reg_def 31
+
+#define GPIO1_2_CONFIG_reg 39
+#define GPIO1_2_CONFIG_reg_def 0
+#define GPIO1_CFG_bm 15
+#define GPIO1_OFF 0
+#define GPIO1_MUTE_DAC 1
+#define GPIO1_CLOCK_VALID_FLAG 2
+#define GPIO1_PLL_LOCKED_FLAG 3
+#define GPIO1_DAC_MIN_VOL_FLAG 4
+#define GPIO1_DAC_AUTOMUTE_STATUS 5
+#define GPIO1_DAC_SOFT_RAMP_DONE_FLAG 6
+#define GPIO1_ADC_CH1_PEAK_FLAG 7
+#define GPIO1_ADC_CH2_PEAK_FLAG 8
+#define GPIO1_PWM_SIGNAL 9
+#define GPIO1_OR_OF_STATUS_BITS 10
+#define GPIO1_BCK_WS_MONITOR 11
+#define GPIO1_MCLK_24M 12
+#define GPIO1_MCLK_128FS 13
+#define GPIO1_OUTPUT0 14
+#define GPIO1_OUTPUT1 15
+#define GPIO2_CFG_bm 240
+#define GPIO2_OFF 0
+#define GPIO2_MUTE_DAC 16
+#define GPIO2_CLOCK_VALID_FLAG 32
+#define GPIO2_PLL_LOCKED_FLAG 48
+#define GPIO2_DAC_MIN_VOL_FLAG 64
+#define GPIO2_DAC_AUTOMUTE_STATUS 80
+#define GPIO2_DAC_SOFT_RAMP_DONE_FLAG 96
+#define GPIO2_ADC_CH1_PEAK_FLAG 112
+#define GPIO2_ADC_CH2_PEAK_FLAG 128
+#define GPIO2_PWM_SIGNAL 144
+#define GPIO2_OR_OF_STATUS_BITS 160
+#define GPIO2_BCK_WS_MONITOR 176
+#define GPIO2_MCLK_24M 192
+#define GPIO2_MCLK_128FS 208
+#define GPIO2_OUTPUT0 224
+#define GPIO2_OUTPUT1 240
+
+#define GPIO3_4_CONFIG_reg 40
+#define GPIO3_4_CONFIG_reg_def 0
+#define GPIO3_CFG_bm 15
+#define GPIO3_OFF 0
+#define GPIO3_MUTE_DAC 1
+#define GPIO3_CLOCK_VALID_FLAG 2
+#define GPIO3_PLL_LOCKED_FLAG 3
+#define GPIO3_DAC_MIN_VOL_FLAG 4
+#define GPIO3_DAC_AUTOMUTE_STATUS 5
+#define GPIO3_DAC_SOFT_RAMP_DONE_FLAG 6
+#define GPIO3_ADC_CH1_PEAK_FLAG 7
+#define GPIO3_ADC_CH2_PEAK_FLAG 8
+#define GPIO3_PWM_SIGNAL 9
+#define GPIO3_OR_OF_STATUS_BITS 10
+#define GPIO3_BCK_WS_MONITOR 11
+#define GPIO3_MCLK_24M 12
+#define GPIO3_MCLK_128FS 13
+#define GPIO3_OUTPUT0 14
+#define GPIO3_OUTPUT1 15
+#define GPIO4_CFG_bm 240
+#define GPIO4_OFF 0
+#define GPIO4_MUTE_DAC 16
+#define GPIO4_CLOCK_VALID_FLAG 32
+#define GPIO4_PLL_LOCKED_FLAG 48
+#define GPIO4_DAC_MIN_VOL_FLAG 64
+#define GPIO4_DAC_AUTOMUTE_STATUS 80
+#define GPIO4_DAC_SOFT_RAMP_DONE_FLAG 96
+#define GPIO4_ADC_CH1_PEAK_FLAG 112
+#define GPIO4_ADC_CH2_PEAK_FLAG 128
+#define GPIO4_PWM_SIGNAL 144
+#define GPIO4_OR_OF_STATUS_BITS 160
+#define GPIO4_BCK_WS_MONITOR 176
+#define GPIO4_MCLK_24M 192
+#define GPIO4_MCLK_128FS 208
+#define GPIO4_OUTPUT0 224
+#define GPIO4_OUTPUT1 240
+
+#define GPIO_CONTROLS1_reg 41
+#define GPIO_CONTROLS1_reg_def 0
+#define GPIO1_OE_bm 1
+#define GPIO2_OE_bm 2
+#define GPIO3_OE_bm 4
+#define GPIO4_OE_bm 8
+#define GPIO1_SDB_bm 16
+#define GPIO2_SDB_bm 32
+#define GPIO3_SDB_bm 64
+#define GPIO4_SDB_bm 128
+
+#define GPIO_CONTROLS2_reg 42
+#define GPIO_CONTROLS2_reg_def 0
+#define GPIO1_WK_EN_bm 1
+#define GPIO2_WK_EN_bm 2
+#define GPIO3_WK_EN_bm 4
+#define GPIO4_WK_EN_bm 8
+#define INVERT_GPIO1_bm 16
+#define INVERT_GPIO2_bm 32
+#define INVERT_GPIO3_bm 64
+#define INVERT_GPIO4_bm 128
+
+#define GPIO_READ_reg 43
+#define GPIO_READ_reg_def 0
+#define GPIO1_READ_bm 1
+#define GPIO2_READ_bm 2
+#define GPIO3_READ_bm 4
+#define GPIO4_READ_bm 8
+
+#define GPIO_OUTPUT_LOGIC_reg 44
+#define GPIO_OUTPUT_LOGIC_reg_def 7
+#define GPIO_AND_VOL_MIN_bm 1
+#define GPIO_AND_AUTOMUTE_bm 2
+#define GPIO_AND_SS_RAMP_bm 4
+#define GPIO_OR_VOL_MIN_bm 8
+#define GPIO_OR_AUTOMUTE_bm 16
+#define GPIO_OR_SS_RAMP_bm 32
+#define FLAG_CH_SEL 64
+
+#define PWM_COUNT_reg 45
+#define PWM_COUNT_reg_def 0
+
+#define PWM_FREQUENCY_LO_reg 46
+#define PWM_FREQUENCY_LO_reg_def 0
+#define PWM_FREQUENCY_HI_reg 47
+#define PWM_FREQUENCY_HI_reg_def 0
+
+#define ADC_DBQ_COEFF_SEL_reg 48
+#define ADC_DBQ_COEFF_SEL_reg_def 1
+#define ADC_DBQ_COEFF_SEL_bm 31
+#define ADC_DBQ_COEFF_SEL_PROG 0
+#define ADC_DBQ_COEFF_SEL_BYP 1
+#define ADC_DBQ_COEFF_SEL_ORDER1_DC_CLOCK 2
+#define ADC_DBQ_COEFF_SEL_48KHZ_DEEMPH 3
+#define ADC_DBQ_COEFF_SEL_44KHZ_DEEMPH 4
+#define ADC_DBQ_COEFF_SEL_32KHZ_DEEMPH 5
+#define ADC_DBQ_COEFF_SEL_RIAA_DEEMPH 6
+#define ADC_DBQ_COEFF_SEL_RIAA_PREEMPH 7
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_48KHZ 8
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_96KHZ 9
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_192KHZ 10
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_384KHZ 11
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_48KHZ 12
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_96KHZ 13
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_192KHZ 14
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_384KHZ 15
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_44KHZ 16
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_88KHZ 17
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_176KHZ 18
+#define ADC_DBQ_COEFF_SEL_80HZ_HP_352KHZ 19
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_44KHZ 20
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_88KHZ 21
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_176KHZ 22
+#define ADC_DBQ_COEFF_SEL_120HZ_HP_352KHZ 23
+#define ADC_DBQ_120HZ_HPF_EN_bm 32
+#define ADC_DBQ_80HZ_HPF_EN_bm 64
+#define ADC_DBQ_CLK_FAMILY_SEL_bm 128
+
+#define ADC_PROG_DBQ_A2_COEFF_1_reg 49
+#define ADC_PROG_DBQ_A2_COEFF_1_reg_def 0
+#define ADC_PROG_DBQ_A2_COEFF_2_reg 50
+#define ADC_PROG_DBQ_A2_COEFF_2_reg_def 0
+#define ADC_PROG_DBQ_A2_COEFF_3_reg 51
+#define ADC_PROG_DBQ_A2_COEFF_3_reg_def 0
+
+#define ADC_PROG_DBQ_A1_COEFF_1_reg 52
+#define ADC_PROG_DBQ_A1_COEFF_1_reg_def 0
+#define ADC_PROG_DBQ_A1_COEFF_2_reg 53
+#define ADC_PROG_DBQ_A1_COEFF_2_reg_def 0
+#define ADC_PROG_DBQ_A1_COEFF_3_reg 54
+#define ADC_PROG_DBQ_A1_COEFF_3_reg_def 0
+
+#define ADC_PROG_DBQ_B2_COEFF_1_reg 55
+#define ADC_PROG_DBQ_B2_COEFF_1_reg_def 0
+#define ADC_PROG_DBQ_B2_COEFF_2_reg 56
+#define ADC_PROG_DBQ_B2_COEFF_2_reg_def 0
+#define ADC_PROG_DBQ_B2_COEFF_3_reg 57
+#define ADC_PROG_DBQ_B2_COEFF_3_reg_def 0
+
+#define ADC_PROG_DBQ_B1_COEFF_1_reg 58
+#define ADC_PROG_DBQ_B1_COEFF_1_reg_def 0
+#define ADC_PROG_DBQ_B1_COEFF_2_reg 59
+#define ADC_PROG_DBQ_B1_COEFF_2_reg_def 0
+#define ADC_PROG_DBQ_B1_COEFF_3_reg 60
+#define ADC_PROG_DBQ_B1_COEFF_3_reg_def 0
+
+#define ADC_PROG_DBQ_B0_COEFF_1_reg 61
+#define ADC_PROG_DBQ_B0_COEFF_1_reg_def 0
+#define ADC_PROG_DBQ_B0_COEFF_2_reg 62
+#define ADC_PROG_DBQ_B0_COEFF_2_reg_def 0
+#define ADC_PROG_DBQ_B0_COEFF_3_reg 63
+#define ADC_PROG_DBQ_B0_COEFF_3_reg_def 0
+
+#define ADC_FIR_FILTER_reg 64
+#define ADC_FIR_FILTER_reg_def 0
+#define ADC_FILTER_SHAPE_bm 224
+#define ADC_FILTER_SHAPE_MIN_PHASE 0
+#define ADC_FILTER_SHAPE_LIN_PHASE_FAST_ROLLOFF_APODIZING 32
+#define ADC_FILTER_SHAPE_LIN_PHASE_FAST_ROLLOFF 64
+#define ADC_FILTER_SHAPE_LIN_PHASE_FAST_ROLLOFF_LOW_RIPPLE 96
+#define ADC_FILTER_SHAPE_LIN_PHASE_SLOW_ROLLOFF 128
+#define ADC_FILTER_SHAPE_MIN_PHASE_FAST_ROLLOFF 160
+#define ADC_FILTER_SHAPE_MIN_PHASE_SLOW_ROLLOFF 192
+#define ADC_FILTER_SHAPE_MIN_PHASE_SLOW_ROLLOFF_LOW_DISPERSION 224
+
+#define ADC_DC_BLOCKING_reg 65
+#define ADC_DC_BLOCKING_reg_def 255
+#define CH1_DC_BLOCK_EN_bm 64
+#define CH2_DC_BLOCK_EN_bm 128
+
+#define PDM_CONFIG_reg 66
+#define PDM_CONFIG_reg_def 42
+#define PDM_PHASE_bm 16
+#define PDM_SAMPLE_EDGE_bm 32
+#define PDM_INPUT_SEL 64
+
+#define PDM_CLK_SELECT_reg 67
+#define PDM_CLK_SELECT_reg_def 3
+#define MCLK_PDM_DIV_bm 127
+
+#define ADC_VOLUME_CH1_reg 68
+#define ADC_VOLUME_CH1_reg_def 0
+
+#define ADC_VOLUME_CH2_reg 69
+#define ADC_VOLUME_CH2_reg_def 0
+
+#define ADC_MIX_VOLUME_CH1_reg 70
+#define ADC_MIX_VOLUME_CH1_reg_def 255
+
+#define ADC_MIX_VOLUME_CH2_reg 71
+#define ADC_MIX_VOLUME_CH2_reg_def 255
+
+#define ADC_DIGITAL_GAIN_reg 72
+#define ADC_DIGITAL_GAIN_reg_def 0
+#define ADC_DIGITAL_GAIN_CH1_bm 7
+#define ADC_DIGITAL_GAIN_CH1_0DB 0
+#define ADC_DIGITAL_GAIN_CH1_6DB 1
+#define ADC_DIGITAL_GAIN_CH1_12DB 2
+#define ADC_DIGITAL_GAIN_CH1_18DB 3
+#define ADC_DIGITAL_GAIN_CH1_24DB 4
+#define ADC_DIGITAL_GAIN_CH1_30DB 5
+#define ADC_DIGITAL_GAIN_CH1_36DB 6
+#define ADC_DIGITAL_GAIN_CH1_42DB 7
+#define ADC_DIGITAL_GAIN_CH2_bm 112
+#define ADC_DIGITAL_GAIN_CH2_0DB 0
+#define ADC_DIGITAL_GAIN_CH2_6DB 16
+#define ADC_DIGITAL_GAIN_CH2_12DB 32
+#define ADC_DIGITAL_GAIN_CH2_18DB 48
+#define ADC_DIGITAL_GAIN_CH2_24DB 64
+#define ADC_DIGITAL_GAIN_CH2_30DB 80
+#define ADC_DIGITAL_GAIN_CH2_36DB 96
+#define ADC_DIGITAL_GAIN_CH2_42DB 112
+
+#define ADC_PHASE_INVERSION_reg 73
+#define ADC_PHASE_INVERSION_reg_def 0
+#define ADC_VOL_PHASE_INV_CH1_bm 1
+#define ADC_VOL_PHASE_INV_CH2_bm 2
+#define ADC_MIX_VOL_PHASE_INV_CH1_bm 4
+#define ADC_MIX_VOL_PHASE_INV_CH2_bm 8
+
+#define PGA_GAIN_CONTROL_reg 82
+#define PGA_GAIN_CONTROL_reg_def 0
+#define PGA_GAIN_CTRL_CH1_bm 15
+#define PGA_GAIN_CTRL_CH2_bm 240
+
+#define PEAK_DETECT_ENABLE_reg 88
+#define PEAK_DETECT_ENABLE_reg_def 0
+#define PEAK_DETECT_CH1_EN_bm 1
+#define PEAK_DETECT_CH2_EN_bm 2
+
+#define PEAK_DETECT_CONFIG_reg 89
+#define PEAK_DETECT_CONFIG_reg_def 2
+#define PEAK_DECAY_RATE_bm 31
+#define LOCK_PEAK_VALUE_bm 64
+
+#define PEAK_THRESHOLD_CH1_reg 90
+#define PEAK_THRESHOLD_CH1_reg_def 255
+#define PEAK_THRESHOLD_CH2_reg 91
+#define PEAK_THRESHOLD_CH2_reg_def 255
+
+#define MIC_BIAS_reg 94
+#define MIC_BIAS_reg_def 2
+#define MB_VR_SET_bm 7
+#define MB_VR_SET_1V45 0
+#define MB_VR_SET_2V55 1
+#define MB_VR_SET_2V65 2
+#define MB_VR_SET_2V75 3
+#define MB_VR_SET_1V65 4
+#define MB_VR_SET_1V75 5
+#define MB_VR_SET_1V85 6
+#define MB_VR_SET_1V95 7
+#define MB_PDB_bm 8
+#define MB_VR_BYPB_bm 64
+
+#define DAC_NSMOD_SEL_reg 100
+#define DAC_NSMOD_SEL_reg_def 0
+#define NSMOD_CH2_SEL_bm 1
+
+#define DAC_DBQ_COEFF_SEL_reg 102
+#define DAC_DBQ_COEFF_SEL_reg_def 1
+#define DAC_DBQ_COEFF_SEL_bm 31
+#define DAC_DBQ_COEFF_SEL_PROG 0
+#define DAC_DBQ_COEFF_SEL_BYP 1
+#define DAC_DBQ_COEFF_SEL_ORDER1_DC_CLOCK 2
+#define DAC_DBQ_COEFF_SEL_48KHZ_DEEMPH 3
+#define DAC_DBQ_COEFF_SEL_44KHZ_DEEMPH 4
+#define DAC_DBQ_COEFF_SEL_32KHZ_DEEMPH 5
+#define DAC_DBQ_COEFF_SEL_RIAA_DEEMPH 6
+#define DAC_DBQ_COEFF_SEL_RIAA_PREEMPH 7
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_48KHZ 8
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_96KHZ 9
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_192KHZ 10
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_384KHZ 11
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_48KHZ 12
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_96KHZ 13
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_192KHZ 14
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_384KHZ 15
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_44KHZ 16
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_88KHZ 17
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_176KHZ 18
+#define DAC_DBQ_COEFF_SEL_80HZ_HP_352KHZ 19
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_44KHZ 20
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_88KHZ 21
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_176KHZ 22
+#define DAC_DBQ_COEFF_SEL_120HZ_HP_352KHZ 23
+
+#define DAC_PROG_DBQ_A2_COEFF_1_reg 103
+#define DAC_PROG_DBQ_A2_COEFF_1_reg_def 0
+#define DAC_PROG_DBQ_A2_COEFF_2_reg 104
+#define DAC_PROG_DBQ_A2_COEFF_2_reg_def 0
+#define DAC_PROG_DBQ_A2_COEFF_3_reg 105
+#define DAC_PROG_DBQ_A2_COEFF_3_reg_def 0
+
+#define DAC_PROG_DBQ_A1_COEFF_1_reg 106
+#define DAC_PROG_DBQ_A1_COEFF_1_reg_def 0
+#define DAC_PROG_DBQ_A1_COEFF_2_reg 107
+#define DAC_PROG_DBQ_A1_COEFF_2_reg_def 0
+#define DAC_PROG_DBQ_A1_COEFF_3_reg 108
+#define DAC_PROG_DBQ_A1_COEFF_3_reg_def 0
+
+#define DAC_PROG_DBQ_B2_COEFF_1_reg 109
+#define DAC_PROG_DBQ_B2_COEFF_1_reg_def 0
+#define DAC_PROG_DBQ_B2_COEFF_2_reg 110
+#define DAC_PROG_DBQ_B2_COEFF_2_reg_def 0
+#define DAC_PROG_DBQ_B2_COEFF_3_reg 111
+#define DAC_PROG_DBQ_B2_COEFF_3_reg_def 0
+
+#define DAC_PROG_DBQ_B1_COEFF_1_reg 112
+#define DAC_PROG_DBQ_B1_COEFF_1_reg_def 0
+#define DAC_PROG_DBQ_B1_COEFF_2_reg 113
+#define DAC_PROG_DBQ_B1_COEFF_2_reg_def 0
+#define DAC_PROG_DBQ_B1_COEFF_3_reg 114
+#define DAC_PROG_DBQ_B1_COEFF_3_reg_def 0
+
+#define DAC_PROG_DBQ_B0_COEFF_1_reg 115
+#define DAC_PROG_DBQ_B0_COEFF_1_reg_def 0
+#define DAC_PROG_DBQ_B0_COEFF_2_reg 116
+#define DAC_PROG_DBQ_B0_COEFF_2_reg_def 0
+#define DAC_PROG_DBQ_B0_COEFF_3_reg 117
+#define DAC_PROG_DBQ_B0_COEFF_3_reg_def 0
+
+#define DAC_FILTER_CONFIG_reg 118
+#define DAC_FILTER_CONFIG_reg_def 0
+#define DAC_FILTER_SHAPE_bm 7
+#define DAC_FILTER_SHAPE_MIN_PHASE 0
+#define DAC_FILTER_SHAPE_LIN_PHASE_FAST_ROLLOFF_APODIZING 1
+#define DAC_FILTER_SHAPE_LIN_PHASE_FAST_ROLLOFF 2
+#define DAC_FILTER_SHAPE_LIN_PHASE_FAST_ROLLOFF_LOW_RIPPLE 3
+#define DAC_FILTER_SHAPE_LIN_PHASE_SLOW_ROLLOFF 4
+#define DAC_FILTER_SHAPE_MIN_PHASE_FAST_ROLLOFF 5
+#define DAC_FILTER_SHAPE_MIN_PHASE_SLOW_ROLLOFF 6
+#define DAC_FILTER_SHAPE_MIN_PHASE_SLOW_ROLLOFF_LOW_DISPERSION 7
+#define BYPASS_FIR2X_bm 8
+#define BYPASS_FIR4X_bm 16
+#define BYPASS_IIR_bm 32
+
+#define DAC_VOLUME_CH1_reg 123
+#define DAC_VOLUME_CH1_reg_def 2
+
+#define DAC_VOLUME_CH2_reg 124
+#define DAC_VOLUME_CH2_reg_def 2
+
+#define DAC_MIX_VOLUME_CH1_reg 125
+#define DAC_MIX_VOLUME_CH1_reg_def 255
+
+#define DAC_MIX_VOLUME_CH2_reg 126
+#define DAC_MIX_VOLUME_CH2_reg_def 255
+
+#define DIRECT_MONITOR_VOLUME_CH1_reg 127
+#define DIRECT_MONITOR_VOLUME_CH1_reg_def 255
+
+#define DIRECT_MONITOR_VOLUME_CH2_reg 128
+#define DIRECT_MONITOR_VOLUME_CH2_reg_def 255
+
+#define DAC_DIGITAL_GAIN_reg 135
+#define DAC_DIGITAL_GAIN_reg_def 0
+#define DAC_DIGITAL_GAIN_CH1_bm 7
+#define DAC_DIGITAL_GAIN_CH1_0DB 0
+#define DAC_DIGITAL_GAIN_CH1_6DB 1
+#define DAC_DIGITAL_GAIN_CH1_12DB 2
+#define DAC_DIGITAL_GAIN_CH1_18DB 3
+#define DAC_DIGITAL_GAIN_CH1_24DB 4
+#define DAC_DIGITAL_GAIN_CH1_30DB 5
+#define DAC_DIGITAL_GAIN_CH1_36DB 6
+#define DAC_DIGITAL_GAIN_CH1_42DB 7
+#define DIR_MON_MUTE_CH1_bm 8
+#define DAC_DIGITAL_GAIN_CH2_bm 112
+#define DAC_DIGITAL_GAIN_CH2_0DB 0
+#define DAC_DIGITAL_GAIN_CH2_6DB 16
+#define DAC_DIGITAL_GAIN_CH2_12DB 32
+#define DAC_DIGITAL_GAIN_CH2_18DB 48
+#define DAC_DIGITAL_GAIN_CH2_24DB 64
+#define DAC_DIGITAL_GAIN_CH2_30DB 80
+#define DAC_DIGITAL_GAIN_CH2_36DB 96
+#define DAC_DIGITAL_GAIN_CH2_42DB 112
+#define DIR_MON_MUTE_CH2_bm 128
+
+#define DAC_PHASE_INVERSION_reg 136
+#define DAC_PHASE_INVERSION_reg_def 0
+#define DAC_VOL_PHASE_INV_CH1_bm 1
+#define DAC_VOL_PHASE_INV_CH2_bm 2
+#define DAC_MIX_VOL_PHASE_INV_CH1_bm 4
+#define DAC_MIX_VOL_PHASE_INV_CH2_bm 8
+#define DIR_MON_VOL_PHASE_INV_CH1_bm 16
+#define DIR_MON_VOL_PHASE_INV_CH2_bm 32
+#define DIR_MON_MONO_CH1_bm 64
+#define DIR_MON_MONO_CH2_bm 128
+
+#define DAC_MUTE_reg 137
+#define DAC_MUTE_reg_def 0
+#define DAC_MUTE_CH1 1
+#define DAC_MUTE_CH2 2
+
+#define SOFT_RAMP_CONFIG_reg 138
+#define SOFT_RAMP_CONFIG_reg_def 3
+#define SOFT_RAMP_TIME_bm 31
+#define MUTE_RAMP_TO_GROUND_bm 32
+
+#define AUTOMUTE_ENABLE_reg 139
+#define AUTOMUTE_ENABLE_reg_def 3
+#define AUTOMUTE_EN_CH1_bm 1
+#define AUTOMUTE_EN_CH2_bm 2
+
+#define AUTOMUTE_TIME1_reg 140
+#define AUTOMUTE_TIME1_reg_def 15
+#define AUTOMUTE_TIME2_reg 141
+#define AUTOMUTE_TIME2_reg_def 0
+
+#define AUTOMUTE_LEVEL1_reg 142
+#define AUTOMUTE_LEVEL1_reg_def 8
+#define AUTOMUTE_LEVEL2_reg 143
+#define AUTOMUTE_LEVEL2_reg_def 0
+
+#define AUTOMUTE_OFF_LEVEL1_reg 144
+#define AUTOMUTE_OFF_LEVEL1_reg_def 10
+#define AUTOMUTE_OFF_LEVEL2_reg 145
+#define AUTOMUTE_OFF_LEVEL2_reg_def 0
+
+#define PLL_CLOCK_SELECT_reg 164
+#define PLL_CLOCK_SELECT_reg_def 33
+#define EN_MCLK_IN_bm 1
+#define SEL_MCLK_IN_bm 6
+#define SEL_MCLK_IN_ACLK_bm 0
+#define SEL_MCLK_IN_PLL_bm 4
+#define EN_PLL_CLK_IN_bm 8
+#define SEL_PLL_CLK_IN_bm 48
+#define SEL_PLL_CLK_IN_ACLK_bm 0
+#define SEL_PLL_CLK_IN_BCK_bm 32
+#define PLL_CLK_PHASE_INV_bm 64
+
+#define PLL_VCO_CP_reg 165
+#define PLL_VCO_CP_reg_def 48
+#define PLL_DIG_RSTB_bm 1
+#define PLL_CLKSMP_PDB_bm 2
+#define PLL_VCO_PDB_bm 4
+#define PLL_CP_PDB_bm 8
+
+#define PLL_REGULATOR_reg 166
+#define PLL_REGULATOR_reg_def 2
+#define PLL_REG_PDB_bm 8
+
+#define PLL_FEEDBACK_DIV1_reg 167
+#define PLL_FEEDBACK_DIV1_reg_def 0
+#define PLL_FEEDBACK_DIV2_reg 168
+#define PLL_FEEDBACK_DIV2_reg_def 0
+#define PLL_FEEDBACK_DIV3_reg 169
+#define PLL_FEEDBACK_DIV3_reg_def 16
+
+#define PLL_IN_OUT_DIV1_reg 170
+#define PLL_IN_OUT_DIV1_reg_def 0
+#define PLL_IN_OUT_DIV2_reg 171
+#define PLL_IN_OUT_DIV2_reg_def 50
+#define PLL_CLK_IN_DIV2_bm 1
+#define PLL_FB_DIV_LOAD_bm 2
+#define PLL_CLK_OUT_DIV_bm 240
+#define PLL_IN_OUT_DIV3_reg 172
+#define PLL_IN_OUT_DIV3_reg_def 16
+
+#define CODEC_VALIDITY_READ_reg 224
+#define AUTO_CH_NUM_bm 31
+#define ADC_TDM_VALID_bm 32
+#define DAC_TDM_VALID_bm 64
+#define PLL_LOCKED_bm 128
+
+#define CHIP_ID_reg 225
+
+#define AUTO_FS_READ_reg 230
+#define MCLK_128FS_DIV_AUTO_bm 63
+#define MCLK_128FS_HALF_DIV_AUTO_bm 64
+#define EN_64FS_MODE_AUTO_bm 128
+
+#define BCK_WS_VALID_reg 231
+#define WS_VALID_bm 1
+#define BCK_INVALID_bm 2
+#define RATIO_VALID_bm 4
+
+#define GPIO_READBACK_reg 132
+#define GPIO1_R_bm 1
+#define GPIO2_R_bm 2
+#define GPIO3_R_bm 4
+#define GPIO4_R_bm 8
+
+#define PEAK_FLAG_reg 233
+#define PEAK_FLAG_CH1_bm 16
+#define PEAK_FLAG_CH2_bm 32
+#define PEAK_FLAG_LAT_CH1_bm 64
+#define PEAK_FLAG_LAT_CH2_bm 128
+
+#define PEAK_CH1_READ1_reg 238
+#define PEAK_CH1_READ2_reg 239
+
+#define PEAK_CH2_READ1_reg 240
+#define PEAK_CH2_READ2_reg 241
+
+#define DAC_VOL_MIN_READ_reg 242
+#define VOL_MIN_CH1_bm 1
+#define VOL_MIN_CH2_bm 2
+
+#define DAC_AUTOMUTE_READ_reg 243
+#define AUTOMUTE_CH1_bm 1
+#define AUTOMUTE_CH2_bm 2
+
+#define DAC_SOFT_RAMP_UP_READ_reg 244
+#define SS_RAMP_UP_CH1_bm 1
+#define SS_RAMP_UP_CH2_bm 2
+
+#define DAC_SOFT_RAMP_DOWN_READ_reg 245
+#define SS_RAMP_DOWN_CH1_bm 1
+#define SS_RAMP_DOWN_CH2_bm 2
+
+#endif /* SRC_ES9290_REG_H_ */
