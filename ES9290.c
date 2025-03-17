@@ -11,10 +11,8 @@
  * Add TDM support
  * Add Master support
  * Add Daisy Chain support
- * Add Filter functions
  * Add PDM Input support
  * Add Volume Ramp support
- *
 */
 
 #include "ES9290.h"
@@ -27,7 +25,7 @@ void ES9290_init(void)
 
 	ES9290_HardReset();
 
-	//PLL internal clock generation
+	//PLL internal clock generation from BCLK
 #ifdef INT_CLK
 	ES9290_RegWrite(PLL_REGULATOR_reg, PLL_REGULATOR_reg_def | PLL_REG_PDB_bm | 4);
 #if (defined(FS_352K) || defined(FS_384K)) && defined(FRAME_32);
@@ -267,6 +265,100 @@ HAL_StatusTypeDef ES9290_SetMonitorVolume(uint8_t channel, float db)
 				return HAL_ERROR;
 				break;
 		}
+}
+
+//This PWM can go to output
+//Frequency = MCLK / (PWM_FREQ + 1)
+//DutyCycle% = (PWM_COUNT / (PWM_FREQ + 1)) * 100
+HAL_StatusTypeDef ES9290_SetPWMCount(uint8_t count)
+{
+	return ES9290_RegWrite(PWM_COUNT_reg, count);
+}
+
+HAL_StatusTypeDef ES9290_SetPWMFreq(uint16_t freq)
+{
+	ES9290_RegWrite(PWM_FREQUENCY_LO_reg, freq & 0xFF);
+	return ES9290_RegWrite(PWM_FREQUENCY_HI_reg, freq >> 8);
+}
+
+HAL_StatusTypeDef ES9290_SetADCDBQ120Hz(uint8_t enable)
+{
+	enable = enable > 1 ? 1 : enable;
+	uint8_t data = (enable * ADC_DBQ_120HZ_HPF_EN_bm) | ADC_DBQ_COEFF_SEL_reg_def;
+#ifdef FAMILY_44
+	data |= ADC_DBQ_CLK_FAMILY_SEL_bm;
+#endif
+	return ES9290_RegWrite(ADC_DBQ_COEFF_SEL_reg, data);
+}
+
+HAL_StatusTypeDef ES9290_SetADCDBQ80Hz(uint8_t enable)
+{
+	enable = enable > 1 ? 1 : enable;
+	uint8_t data = (ADC_DBQ_80HZ_HPF_EN_bm * enable) | ADC_DBQ_COEFF_SEL_reg_def;
+#ifdef FAMILY_44
+	data |= ADC_DBQ_CLK_FAMILY_SEL_bm;
+#endif
+	return ES9290_RegWrite(ADC_DBQ_COEFF_SEL_reg, data);
+}
+
+HAL_StatusTypeDef ES9290_SetADCDBQCustom(int A1, int A2, int B0, int B1, int B2, uint8_t enable)
+{
+	if(enable)
+	{
+		//Set custom coeficients
+		ES9290_RegWrite(ADC_PROG_DBQ_A1_COEFF_1_reg, A1 & 0xFF);
+		ES9290_RegWrite(ADC_PROG_DBQ_A1_COEFF_2_reg, (A1 & 0xFF00) >> 8);
+		ES9290_RegWrite(ADC_PROG_DBQ_A1_COEFF_3_reg, (A1 & 0xFF0000) >> 16);
+		ES9290_RegWrite(ADC_PROG_DBQ_A2_COEFF_1_reg, A2 & 0xFF);
+		ES9290_RegWrite(ADC_PROG_DBQ_A2_COEFF_2_reg, (A2 & 0xFF00) >> 8);
+		ES9290_RegWrite(ADC_PROG_DBQ_A2_COEFF_3_reg, (A2 & 0xFF0000) >> 16);
+		ES9290_RegWrite(ADC_PROG_DBQ_B0_COEFF_1_reg, B0 & 0xFF);
+		ES9290_RegWrite(ADC_PROG_DBQ_B0_COEFF_2_reg, (B0 & 0xFF00) >> 8);
+		ES9290_RegWrite(ADC_PROG_DBQ_B0_COEFF_3_reg, (B0 & 0xFF0000) >> 16);
+		ES9290_RegWrite(ADC_PROG_DBQ_B1_COEFF_1_reg, B1 & 0xFF);
+		ES9290_RegWrite(ADC_PROG_DBQ_B1_COEFF_2_reg, (B1 & 0xFF00) >> 8);
+		ES9290_RegWrite(ADC_PROG_DBQ_B1_COEFF_3_reg, (B1 & 0xFF0000) >> 16);
+		ES9290_RegWrite(ADC_PROG_DBQ_B2_COEFF_1_reg, B2 & 0xFF);
+		ES9290_RegWrite(ADC_PROG_DBQ_B2_COEFF_2_reg, (B2 & 0xFF00) >> 8);
+		ES9290_RegWrite(ADC_PROG_DBQ_B2_COEFF_3_reg, (B2 & 0xFF0000) >> 16);
+
+		return ES9290_RegWrite(ADC_DBQ_COEFF_SEL_reg, ADC_DBQ_COEFF_SEL_PROG_bm);
+	}
+	else
+	{
+		//if disable, bypass
+		return ES9290_RegWrite(ADC_DBQ_COEFF_SEL_reg, ADC_DBQ_COEFF_SEL_reg_def);
+	}
+}
+
+HAL_StatusTypeDef ES9290_SetDACDBQCustom(int A1, int A2, int B0, int B1, int B2, uint8_t enable)
+{
+	if(enable)
+	{
+		//Set custom coeficients
+		ES9290_RegWrite(DAC_PROG_DBQ_A1_COEFF_1_reg, A1 & 0xFF);
+		ES9290_RegWrite(DAC_PROG_DBQ_A1_COEFF_2_reg, (A1 & 0xFF00) >> 8);
+		ES9290_RegWrite(DAC_PROG_DBQ_A1_COEFF_3_reg, (A1 & 0xFF0000) >> 16);
+		ES9290_RegWrite(DAC_PROG_DBQ_A2_COEFF_1_reg, A2 & 0xFF);
+		ES9290_RegWrite(DAC_PROG_DBQ_A2_COEFF_2_reg, (A2 & 0xFF00) >> 8);
+		ES9290_RegWrite(DAC_PROG_DBQ_A2_COEFF_3_reg, (A2 & 0xFF0000) >> 16);
+		ES9290_RegWrite(DAC_PROG_DBQ_B0_COEFF_1_reg, B0 & 0xFF);
+		ES9290_RegWrite(DAC_PROG_DBQ_B0_COEFF_2_reg, (B0 & 0xFF00) >> 8);
+		ES9290_RegWrite(DAC_PROG_DBQ_B0_COEFF_3_reg, (B0 & 0xFF0000) >> 16);
+		ES9290_RegWrite(DAC_PROG_DBQ_B1_COEFF_1_reg, B1 & 0xFF);
+		ES9290_RegWrite(DAC_PROG_DBQ_B1_COEFF_2_reg, (B1 & 0xFF00) >> 8);
+		ES9290_RegWrite(DAC_PROG_DBQ_B1_COEFF_3_reg, (B1 & 0xFF0000) >> 16);
+		ES9290_RegWrite(DAC_PROG_DBQ_B2_COEFF_1_reg, B2 & 0xFF);
+		ES9290_RegWrite(DAC_PROG_DBQ_B2_COEFF_2_reg, (B2 & 0xFF00) >> 8);
+		ES9290_RegWrite(DAC_PROG_DBQ_B2_COEFF_3_reg, (B2 & 0xFF0000) >> 16);
+
+		return ES9290_RegWrite(DAC_DBQ_COEFF_SEL_reg, DAC_DBQ_COEFF_SEL_PROG_bm);
+	}
+	else
+	{
+		//if disable, bypass
+		return ES9290_RegWrite(DAC_DBQ_COEFF_SEL_reg, DAC_DBQ_COEFF_SEL_reg_def);
+	}
 }
 
 HAL_StatusTypeDef ES9290_RegWrite(uint8_t reg, uint8_t data)
